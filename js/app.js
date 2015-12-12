@@ -1,5 +1,5 @@
 angular
-  .module('worldApp', ['angular-jwt', 'ng-Resource'])
+  .module('worldApp', ['angular-jwt', 'ngResource'])
   .constant('API', 'http://localhost:3000/api')
   .config(function($httpProvider){
     $httpProvider.interceptors.push('AuthInterceptor')
