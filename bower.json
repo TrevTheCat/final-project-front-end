@@ -25,8 +25,7 @@
     "angular-ui-router": "~0.2.15",
     "angular": "~1.4.8",
     "angular-jwt": "~0.0.9",
-    "angular-resource": "~1.4.8",
-    "angular-lodash-module": "~1.2.0"
+    "angular-resource": "~1.4.8"
   },
   "devDependencies": {
     "jshint": "~2.9.0"
