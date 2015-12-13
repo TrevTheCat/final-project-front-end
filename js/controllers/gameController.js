@@ -10,6 +10,8 @@ function GameController($http, $window){
   self.data = [];
 
   self.selectedCountries = [];
+  self.winCounter = 0;
+  self.counter = 0;
 
   function getData () {
     $http.get('https://restcountries.eu/rest/v1/all')
@@ -25,14 +27,58 @@ function GameController($http, $window){
   self.getRandomCountries = function() {
     self.data = _.shuffle(self.data);
     self.selectedCountries = _.slice(self.data, 0, 4);
+    self.selectQuestion();
   }
 
-  self.checkWin = function(country) {
+  self.selectQuestion = function (){
+    var questions = _.shuffle(['areaBig', 'areaSmall']);
+    if (_.first(questions)=== 'areaBig'){
+      self.question = "Which of these countries is the biggest?";
+    }
+    else {
+      self.question = "Which of these countries is the smallest?";
+    }
+  }
+
+
+  self.checkWin = function (country) {
+    if (self.question === "Which of these countries is the biggest?") {
+      return self.areaBigCheckWin(country);
+    }
+    else {
+      return self.areaSmallCheckWin(country);
+    }
+  }
+
+  self.areaBigCheckWin = function(country) {
+    self.counter++;
     var areaOfSelectedCountries = (_.sortBy(_.map(self.selectedCountries, 'area')));
     if (country.area == areaOfSelectedCountries[3]){
-      return ('correct')
+      console.log('correct')
+      return self.displayWin();
     }
-    else console.log('incorrect')
+    else {console.log('incorrect')
+      return self.message = "incorrect";
+    }
+  }
+
+  self.areaSmallCheckWin = function(country) {
+    self.counter++;
+    var areaOfSelectedCountries = (_.sortBy(_.map(self.selectedCountries, 'area')));
+    if (country.area == areaOfSelectedCountries[0]){
+      console.log('correct')
+      return self.displayWin();
+    }
+    else {console.log('incorrect')
+      return self.message = "incorrect";
+    }
+  }
+
+
+  self.displayWin = function() {
+    self.winCounter++
+    self.message = "correct";
+    return self.getRandomCountries()
   }
 
   getData();

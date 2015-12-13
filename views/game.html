@@ -1,10 +1,14 @@
 <section>
   <h1>Quiz</h1>
 
-  <h3>Which country has the largest area?</h3>
+  <h3>{{game.question}}</h3>
   <ul ng-repeat="country in game.selectedCountries">
     <li ng-click="game.checkWin(country)">{{country.name}}</li>
   </ul>
+
+  <p>{{game.message}}</p>
+
+  <p>{{game.winCounter}} / {{game.counter}}</p>
 
   <button ng-click="game.getRandomCountries()">Shuffle!</button>
 
