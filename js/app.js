@@ -1,12 +1,12 @@
 angular
   .module('worldApp', ['angular-jwt', 'ngResource', 'ui.router'])
-  .constant('API', 'http://localhost:3000/api')
+  .constant('API', 'http://localhost:3000/api') 
+  .config(MainRouter)
   .config(function($httpProvider){
     $httpProvider.interceptors.push('AuthInterceptor')
-  })
-  .config(MainRouter);
+  });
 
-function MainRouter($stateProvider, urlRouterProvider) {
+function MainRouter($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('register', {
       url: '/register',
@@ -14,8 +14,13 @@ function MainRouter($stateProvider, urlRouterProvider) {
     })
     .state('login', {
       url:'/login',
-      templateUrl:'register.html'
+      templateUrl:'login.html'
     })
+    .state('game', {
+      url: '/game',
+      templateUrl: 'game.html',
+      controller: 'GameController as game'
+    });
 
   $urlRouterProvider.otherwise('/');
 }

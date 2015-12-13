@@ -1,0 +1,22 @@
+{
+  "name": "front-end",
+  "homepage": "https://github.com/TrevTheCat/final-project-front-end",
+  "authors": [
+    "TrevTheCat <alicegdunn@hotmail.co.uk>"
+  ],
+  "description": "final project front end",
+  "main": "index.html",
+  "moduleType": [],
+  "keywords": [
+    "world"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
