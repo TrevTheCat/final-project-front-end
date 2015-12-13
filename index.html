@@ -23,7 +23,8 @@
     <nav class="tabs">
       <a ui-sref="register">Register</a>
       <a ui-sref="login">Login</a>
-      <a ui-sref="game">Play Quiz</a>
+      <a ng-show="users.isLoggedIn()"ui-sref="game">Play Quiz</a>
+      <a ng-click="users.disappear()">Logout</a>
     </nav>
   </header>
 

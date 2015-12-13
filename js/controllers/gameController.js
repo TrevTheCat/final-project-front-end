@@ -31,12 +31,19 @@ function GameController($http, $window){
   }
 
   self.selectQuestion = function (){
-    var questions = _.shuffle(['areaBig', 'areaSmall']);
-    if (_.first(questions)=== 'areaBig'){
+    var questions = _.shuffle(['areaBig', 'areaSmall', 'popBig', 'popSmall']);
+    var ques = _.first(questions)
+    if (ques === 'areaBig'){
       self.question = "Which of these countries is the biggest?";
     }
+    else if (ques === 'areaSmall'){
+      self.question = "Which of these countries is the smallest?"
+    }
+    else if (ques === 'popSmall') {
+      self.question = "Which of these countries has the smallest population?"
+    }
     else {
-      self.question = "Which of these countries is the smallest?";
+      self.question = "Which of these countries has the largest population?";
     }
   }
 
@@ -45,13 +52,25 @@ function GameController($http, $window){
     if (self.question === "Which of these countries is the biggest?") {
       return self.areaBigCheckWin(country);
     }
-    else {
+    else if (self.question === "Which of these countries is the smallest?") {
       return self.areaSmallCheckWin(country);
     }
+    else if (self.question === "Which of these countries has the largest population?") {
+      return self.popBigCheckWin(country)
+    }
+    else if (self.question === "Which of these countries has the smallest population?") {
+      return self.popSmallCheckWin(country)
+    }
+
   }
 
   self.areaBigCheckWin = function(country) {
     self.counter++;
+    for (i=0; i<self.selectedCountries.length; i++){
+      if (self.selectedCountries[i].area === null){
+        self.selectedCountries[i].area = 0
+      }
+    }
     var areaOfSelectedCountries = (_.sortBy(_.map(self.selectedCountries, 'area')));
     if (country.area == areaOfSelectedCountries[3]){
       return self.displayWin();
@@ -63,8 +82,44 @@ function GameController($http, $window){
 
   self.areaSmallCheckWin = function(country) {
     self.counter++;
+    for (i=0; i<self.selectedCountries.length; i++){
+      if (self.selectedCountries[i].area === null){
+        self.selectedCountries[i].area = 0
+      }
+    }
     var areaOfSelectedCountries = (_.sortBy(_.map(self.selectedCountries, 'area')));
     if (country.area == areaOfSelectedCountries[0]){
+      return self.displayWin();
+    }
+    else {
+      return self.message = "incorrect";
+    }
+  }
+
+  self.popBigCheckWin = function(country) {
+    self.counter++;
+    for (i=0; i<self.selectedCountries.length; i++){
+      if (self.selectedCountries[i].population === null){
+        self.selectedCountries[i].population = 0
+      }
+    }
+    var popOfSelectedCountries = (_.sortBy(_.map(self.selectedCountries, 'population')));
+    if (country.population == popOfSelectedCountries[3]){
+      return self.displayWin();
+    }
+    else {
+      return self.message = "incorrect";
+    }
+  }
+  self.popSmallCheckWin = function(country) {
+    self.counter++;
+    for (i=0; i<self.selectedCountries.length; i++){
+      if (self.selectedCountries[i].population === null){
+        self.selectedCountries[i].population = 0
+      }
+    }
+    var popOfSelectedCountries = (_.sortBy(_.map(self.selectedCountries, 'population')));
+    if (country.population == popOfSelectedCountries[0]){
       return self.displayWin();
     }
     else {
