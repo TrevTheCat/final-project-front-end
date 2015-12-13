@@ -28,11 +28,9 @@ function GameController($http, $window){
   }
 
   self.checkWin = function(country) {
-    console.log(country.area);
     var areaOfSelectedCountries = (_.sortBy(_.map(self.selectedCountries, 'area')));
-    console.log(areaOfSelectedCountries[3])
     if (country.area == areaOfSelectedCountries[3]){
-      console.log('correct')
+      return ('correct')
     }
     else console.log('incorrect')
   }
