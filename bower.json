@@ -18,5 +18,12 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "lodash": "~3.10.1",
+    "gulp": "~3.9.0"
+  },
+  "devDependencies": {
+    "jshint": "~2.9.0"
+  }
 }
