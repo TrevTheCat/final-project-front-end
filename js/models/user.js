@@ -1,6 +1,6 @@
 angular
-  .module('worldApp')
-  .factory('User', User);
+.module('worldApp')
+.factory('User', User);
 
 User.$inject = ['$resource', 'API'];
 function User($resource, API) {

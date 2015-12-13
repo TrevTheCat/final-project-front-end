@@ -10,20 +10,19 @@ function UserController(User, TokenService) {
   self.user = {};
 
   function handleLogin(res) {
-    var token = res.token ? res.token : null;
-
+    var token = res.token ? res.token:null;
+   
     if (token) {
       console.log(res);
       self.getUsers();
-      self.user = TokenService.decodeToken();
+      self.user = TokenService.getCurrentUser();
     }
 
     self.message = res.message;
   }
 
-  self.register = function(res){
-    console.log(res)
-    User.register.join(self.user, handleLogin())
+  self.register = function(){
+    User.register(self.user, handleLogin)
   }
 
   self.login = function(){

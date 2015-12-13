@@ -1,0 +1,21 @@
+<section id="register">
+<h2>Register</h2>
+<form id="sign-up" ng-submit="users.register()">
+  <label for="username">username</label>
+  <input type="text" name="username" placeholder="Username" ng-model="users.user.local.username">
+
+  <label for="fullname">Full Name</label>
+  <input type="fullname" name="fullname" placeholder="fullname" ng-model="users.user.local.fullname">
+
+  <label for="image">Image URL</label>
+  <input type="text" name="image" placeholder="Image URL" ng-model="users.user.local.image">
+
+  <label for="email">Email</label>
+  <input type="text" name="email" placeholder="Email Address" ng-model="users.user.local.email">
+
+  <label for="password">Password</label>
+  <input type="password" name="password" placeholder="Password" ng-model="users.user.local.password">
+
+  <input type="submit" value="submit">
+</form>
+</section>

@@ -4,3 +4,11 @@ angular
   .config(function($httpProvider){
     $httpProvider.interceptors.push('AuthInterceptor')
   })
+
+function MainRouter($stateProvider, urlRouterProvider) {
+  $stateProvider
+    .state('register', {
+      url: '/register',
+      templateUrl: 'register.html'
+    })
+}

@@ -5,6 +5,7 @@ angular
 function AuthInterceptor(API, TokenService) {
   return {
     request: function(config) {
+      console.log('auth')
       var token = TokenService.getToken();
 
       if (config.url.match(API) && token) {
