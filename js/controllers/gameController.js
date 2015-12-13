@@ -54,10 +54,9 @@ function GameController($http, $window){
     self.counter++;
     var areaOfSelectedCountries = (_.sortBy(_.map(self.selectedCountries, 'area')));
     if (country.area == areaOfSelectedCountries[3]){
-      console.log('correct')
       return self.displayWin();
     }
-    else {console.log('incorrect')
+    else {
       return self.message = "incorrect";
     }
   }
@@ -66,10 +65,9 @@ function GameController($http, $window){
     self.counter++;
     var areaOfSelectedCountries = (_.sortBy(_.map(self.selectedCountries, 'area')));
     if (country.area == areaOfSelectedCountries[0]){
-      console.log('correct')
       return self.displayWin();
     }
-    else {console.log('incorrect')
+    else {
       return self.message = "incorrect";
     }
   }
