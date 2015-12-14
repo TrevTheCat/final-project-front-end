@@ -38,6 +38,7 @@ function UserController(User, TokenService) {
   self.getUsers = function(){
     User.query(function(data){
       self.all = data.users;
+      console.log(data.users)
     });
   }
 
@@ -48,4 +49,20 @@ function UserController(User, TokenService) {
     self.getUsers();
     self.user = TokenService.getCurrentUser();
   }
+
+  self.updateScore = function() {
+    User.update({ id: user._id}, user, function() {
+
+    });
+  }
+
+  // this.findAndUpdate = function(){
+  //   var character = Character/get({ id:id }, function (character) {
+  //     //do some stuff..
+  //     character.name = "new Name";
+  //     character.$save(function() {
+  //       //update view
+  //     });
+  //   });
+  // };
 }
