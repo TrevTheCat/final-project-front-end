@@ -12,6 +12,7 @@ function GameController($http, $window){
   self.selectedCountries = [];
   self.winCounter = 0;
   self.counter = 0;
+  self.chooseCountry = {};
 
   function getData () {
     $http.get('https://restcountries.eu/rest/v1/all')
@@ -31,7 +32,7 @@ function GameController($http, $window){
   }
 
   self.selectQuestion = function (){
-    var questions = _.shuffle(['areaBig', 'areaSmall', 'popBig', 'popSmall']);
+    var questions = _.shuffle(['areaBig', 'areaSmall', 'popBig', 'popSmall', 'borders']);
     var ques = _.first(questions)
     if (ques === 'areaBig'){
       self.question = "Which of these countries is the biggest?";
@@ -42,9 +43,21 @@ function GameController($http, $window){
     else if (ques === 'popSmall') {
       self.question = "Which of these countries has the smallest population?"
     }
+    else if (ques === 'borders') {
+      self.question = "Which of these country has the following borders?"
+      return self.bordersQuestion();
+    }
     else {
       self.question = "Which of these countries has the largest population?";
     }
+  }
+
+  self.bordersQuestion = function() {
+    var shuffle = _.shuffle(self.selectedCountries);
+    self.chooseCountry = _.first(shuffle);
+    console.log(self.chooseCountry);
+    self.question = "Which country has the following borders? " + self.chooseCountry.borders;
+    return self.chooseCountry;
   }
 
 
@@ -61,6 +74,7 @@ function GameController($http, $window){
     else if (self.question === "Which of these countries has the smallest population?") {
       return self.popSmallCheckWin(country)
     }
+    else { return self.bordersCheckWin(country) }
 
   }
 
@@ -124,6 +138,17 @@ function GameController($http, $window){
     }
     else {
       return self.message = "incorrect";
+    }
+  }
+
+  self.bordersCheckWin = function(country) {
+    self.counter++;
+    console.log(self.chooseCountry)
+    if (country.borders == self.chooseCountry.borders){
+      return self.displayWin()
+    }
+    else {
+      return self.message = "incorrect"
     }
   }
 
