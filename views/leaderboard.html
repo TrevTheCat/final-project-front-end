@@ -1,6 +1,6 @@
 <section>
   <h2>Leaderboard</h2>
-  <ul ng-repeat="user in users">
+  <ul ng-repeat="user in users.all | orderBy:'-local.score'">
     <li>{{user.local.username}}</li>
     <li>{{user.local.fullname}}</li>
     <li>{{user.local.score}}</li>

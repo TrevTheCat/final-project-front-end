@@ -9,9 +9,10 @@ function GameController($http, $window, TokenService){
   var self = this;
   self.data = [];
   self.user = TokenService.getCurrentUser();
+  console.log(self.user)
+  self.user.local.score;
 
   self.selectedCountries = [];
-  self.winCounter = User.score || 0;
   self.chooseCountry = {};
 
   function getData () {
@@ -32,7 +33,7 @@ function GameController($http, $window, TokenService){
   }
 
   self.selectQuestion = function (){
-    var questions = _.shuffle(['areaBig', 'areaSmall', 'popBig', 'popSmall', 'borders', 'borders']);
+    var questions = _.shuffle(['areaBig', 'areaSmall', 'popBig', 'popSmall', 'borders', 'borders', 'capital']);
     var ques = _.first(questions)
     if (ques === 'areaBig'){
       self.question = "Which of these countries is the biggest?";
@@ -47,9 +48,19 @@ function GameController($http, $window, TokenService){
       self.question = "Which of these country has the following borders?"
       return self.bordersQuestion();
     }
+    else if (ques === 'capital') {
+      self.question = "Which country has a capital of :"
+      return self.capitalQuestion();
+    }
     else {
       self.question = "Which of these countries has the largest population?";
     }
+  }
+
+  self.capitalQuestion = function() {
+    var shuffle = _.shuffle(self.selectedCountries);
+    self.chooseCountry = _.first(shuffle);
+    return self.question = "Which country has a capital of " + self.chooseCountry.capital + "?"
   }
 
   self.bordersQuestion = function() {
@@ -80,6 +91,9 @@ function GameController($http, $window, TokenService){
     }
     else if (self.question === "Which of these countries has the smallest population?") {
       return self.popSmallCheckWin(country)
+    }
+    else if (self.question === "Which country has a capital of " + self.chooseCountry.capital + "?" ) {
+      return self.capitalCheckWin(country)
     }
     else { return self.bordersCheckWin(country) }
 
@@ -144,6 +158,16 @@ function GameController($http, $window, TokenService){
     }
   }
 
+  self.capitalCheckWin = function(country){
+    if (country.capital == self.chooseCountry.capital){
+      console.log('correct')
+      return self.displayWin();
+    }
+    else {
+      return self.incorrect();
+    }
+  }
+
   self.bordersCheckWin = function(country) {
     if (country.borders == self.chooseCountry.borders){
       return self.displayWin()
@@ -154,15 +178,15 @@ function GameController($http, $window, TokenService){
   }
 
   self.incorrect = function(){
-    self.winCounter--;
+    self.user.local.score--;
     self.message = "Incorrect, try again!"
   }
 
   self.displayWin = function() {
-    self.winCounter++;
-    self.user.local.score = self.winCounter;
-    $http.patch('http://localhost:3000/api/users/' + self.user._id, self.user.local.score);
-    console.log(self.user.local.score)
+    self.user.local.score++;
+    $http.patch('http://localhost:3000/api/users/' + self.user._id, self.user.local);
+    self.user.$save;
+    console.log(self.user)
     return self.getRandomCountries()
   }
 
