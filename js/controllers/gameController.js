@@ -10,7 +10,7 @@ function GameController($http, $window){
   self.data = [];
 
   self.selectedCountries = [];
-  self.winCounter = 0;
+  self.winCounter = User.score || 0;
   self.chooseCountry = {};
 
   function getData () {
@@ -95,8 +95,7 @@ function GameController($http, $window){
       return self.displayWin();
     }
     else {
-      self.winCounter--;
-      return self.message = "incorrect";
+      return self.incorrect();
     }
   }
 
@@ -111,8 +110,7 @@ function GameController($http, $window){
       return self.displayWin();
     }
     else {
-      self.winCounter--;
-      return self.message = "incorrect";
+      return self.incorrect();
     }
   }
 
@@ -127,8 +125,7 @@ function GameController($http, $window){
       return self.displayWin();
     }
     else {
-      self.winCounter--;
-      return self.message = "incorrect";
+      return self.incorrect();
     }
   }
   self.popSmallCheckWin = function(country) {
@@ -142,8 +139,7 @@ function GameController($http, $window){
       return self.displayWin();
     }
     else {
-      self.winCounter--;
-      return self.message = "incorrect";
+      return self.incorrect();
     }
   }
 
@@ -153,11 +149,14 @@ function GameController($http, $window){
       return self.displayWin()
     }
     else {
-      self.winCounter--;
-      return self.message = "incorrect"
+      return self.incorrect()
     }
   }
 
+  self.incorrect = function(){
+    self.winCounter--;
+    self.message = "Incorrect, try again!"
+  }
 
   self.displayWin = function() {
     self.winCounter++;
