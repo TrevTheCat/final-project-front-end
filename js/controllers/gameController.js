@@ -55,13 +55,16 @@ function GameController($http, $window){
   self.bordersQuestion = function() {
     var shuffle = _.shuffle(self.selectedCountries);
     self.chooseCountry = _.first(shuffle);
-    console.log(self.chooseCountry);
-    self.question = "Which country has the following borders? " + self.chooseCountry.borders;
+    if (self.chooseCountry.borders == 0 ) {
+      self.question = "Which country is not bordered by any other country"
+    }
+     else { self.question = "Which country has the following borders? " + self.chooseCountry.borders }
     return self.chooseCountry;
   }
 
 
   self.checkWin = function (country) {
+    self.counter++;
     if (self.question === "Which of these countries is the biggest?") {
       return self.areaBigCheckWin(country);
     }
@@ -79,7 +82,6 @@ function GameController($http, $window){
   }
 
   self.areaBigCheckWin = function(country) {
-    self.counter++;
     for (i=0; i<self.selectedCountries.length; i++){
       if (self.selectedCountries[i].area === null){
         self.selectedCountries[i].area = 0
@@ -95,7 +97,6 @@ function GameController($http, $window){
   }
 
   self.areaSmallCheckWin = function(country) {
-    self.counter++;
     for (i=0; i<self.selectedCountries.length; i++){
       if (self.selectedCountries[i].area === null){
         self.selectedCountries[i].area = 0
@@ -111,7 +112,6 @@ function GameController($http, $window){
   }
 
   self.popBigCheckWin = function(country) {
-    self.counter++;
     for (i=0; i<self.selectedCountries.length; i++){
       if (self.selectedCountries[i].population === null){
         self.selectedCountries[i].population = 0
@@ -126,7 +126,6 @@ function GameController($http, $window){
     }
   }
   self.popSmallCheckWin = function(country) {
-    self.counter++;
     for (i=0; i<self.selectedCountries.length; i++){
       if (self.selectedCountries[i].population === null){
         self.selectedCountries[i].population = 0
@@ -142,7 +141,6 @@ function GameController($http, $window){
   }
 
   self.bordersCheckWin = function(country) {
-    self.counter++;
     console.log(self.chooseCountry)
     if (country.borders == self.chooseCountry.borders){
       return self.displayWin()
