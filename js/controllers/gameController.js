@@ -2,12 +2,13 @@ angular
   .module('worldApp')
   .controller('GameController', GameController);
 
-GameController.$inject = ['$http', '$window'];
-function GameController($http, $window){
+GameController.$inject = ['$http', '$window', 'TokenService'];
+function GameController($http, $window, TokenService){
 
   var _ = $window._;
   var self = this;
   self.data = [];
+  self.user = TokenService.getCurrentUser();
 
   self.selectedCountries = [];
   self.winCounter = User.score || 0;
@@ -144,7 +145,6 @@ function GameController($http, $window){
   }
 
   self.bordersCheckWin = function(country) {
-    console.log(self.chooseCountry)
     if (country.borders == self.chooseCountry.borders){
       return self.displayWin()
     }
@@ -160,7 +160,9 @@ function GameController($http, $window){
 
   self.displayWin = function() {
     self.winCounter++;
-    self.message = "correct";
+    self.user.local.score = self.winCounter;
+    $http.patch('http://localhost:3000/api/users/' + self.user._id, self.user.local.score);
+    console.log(self.user.local.score)
     return self.getRandomCountries()
   }
 
