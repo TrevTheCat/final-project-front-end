@@ -32,7 +32,7 @@ function GameController($http, $window){
   }
 
   self.selectQuestion = function (){
-    var questions = _.shuffle(['areaBig', 'areaSmall', 'popBig', 'popSmall', 'borders']);
+    var questions = _.shuffle(['areaBig', 'areaSmall', 'popBig', 'popSmall', 'borders', 'borders']);
     var ques = _.first(questions)
     if (ques === 'areaBig'){
       self.question = "Which of these countries is the biggest?";
@@ -58,7 +58,12 @@ function GameController($http, $window){
     if (self.chooseCountry.borders == 0 ) {
       self.question = "Which country is not bordered by any other country"
     }
-     else { self.question = "Which country has the following borders? " + self.chooseCountry.borders }
+    else {
+      self.question = "Which country has the following borders? " + self.chooseCountry.borders.map(function(alpha3Code) {
+        return _.find(self.data, { alpha3Code: alpha3Code }).name;
+      }).join(", ");
+    }
+
     return self.chooseCountry;
   }
 
