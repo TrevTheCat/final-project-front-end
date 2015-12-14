@@ -11,7 +11,6 @@ function GameController($http, $window){
 
   self.selectedCountries = [];
   self.winCounter = 0;
-  self.counter = 0;
   self.chooseCountry = {};
 
   function getData () {
@@ -69,7 +68,6 @@ function GameController($http, $window){
 
 
   self.checkWin = function (country) {
-    self.counter++;
     if (self.question === "Which of these countries is the biggest?") {
       return self.areaBigCheckWin(country);
     }
@@ -97,6 +95,7 @@ function GameController($http, $window){
       return self.displayWin();
     }
     else {
+      self.winCounter--;
       return self.message = "incorrect";
     }
   }
@@ -112,6 +111,7 @@ function GameController($http, $window){
       return self.displayWin();
     }
     else {
+      self.winCounter--;
       return self.message = "incorrect";
     }
   }
@@ -127,6 +127,7 @@ function GameController($http, $window){
       return self.displayWin();
     }
     else {
+      self.winCounter--;
       return self.message = "incorrect";
     }
   }
@@ -141,6 +142,7 @@ function GameController($http, $window){
       return self.displayWin();
     }
     else {
+      self.winCounter--;
       return self.message = "incorrect";
     }
   }
@@ -151,13 +153,14 @@ function GameController($http, $window){
       return self.displayWin()
     }
     else {
+      self.winCounter--;
       return self.message = "incorrect"
     }
   }
 
 
   self.displayWin = function() {
-    self.winCounter++
+    self.winCounter++;
     self.message = "correct";
     return self.getRandomCountries()
   }
