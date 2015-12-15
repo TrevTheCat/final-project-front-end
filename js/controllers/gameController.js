@@ -184,8 +184,8 @@ function GameController($http, $window, TokenService){
 
   self.displayWin = function() {
     self.user.local.score++;
-    $http.patch('http://localhost:3000/api/users/' + self.user._id, self.user.local);
-    self.user.$save;
+    $http.patch('http://localhost:3000/api/users/' + self.user._id, self.user);
+    self.user.$save
     console.log(self.user)
     return self.getRandomCountries()
   }

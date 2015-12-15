@@ -1,0 +1,24 @@
+body {
+  background-image: url("http://educypedia.karadimov.info/library/world.gif");
+  background-size: cover;
+  
+  
+}
+
+.title {
+  height: 200px;
+  background-image: url("http://theamericangenius.com/wp-content/uploads/2012/03/vintage-map.png");
+
+}  
+h1 {
+  text-align: center;
+  color: white;
+  font-size: 75px;
+  padding: 40px;
+}
+
+header {
+  width: 100%;
+  
+}
+
