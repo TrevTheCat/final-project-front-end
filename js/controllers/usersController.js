@@ -35,9 +35,7 @@ function UserController(User, TokenService) {
   }
 
   function getUsers (){
-    console.log("GETTING USERS");
     User.query(function(data){
-      console.log(data);
       self.all = data.users;
     });
   }

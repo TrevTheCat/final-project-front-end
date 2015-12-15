@@ -177,7 +177,6 @@ function GameController($http, $window, TokenService, User){
 
   self.capitalCheckWin = function(country){
     if (country.capital == self.chooseCountry.capital){
-      console.log('correct')
       return self.displayWin();
     }
     else {
@@ -209,6 +208,7 @@ function GameController($http, $window, TokenService, User){
   }
 
   self.displayWin = function() {
+    self.message = ""
     self.user.local.score++;
     User.update({id: self.user._id}, self.user, function (res){
       return self.getRandomCountries()
