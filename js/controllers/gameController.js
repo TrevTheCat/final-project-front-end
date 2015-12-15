@@ -20,7 +20,6 @@ function GameController($http, $window, TokenService, User){
       });
   }
 
-
   self.getCountryByName = function(name) {
     return _.where(self.data, { name: name });
   }
@@ -212,10 +211,7 @@ function GameController($http, $window, TokenService, User){
     self.user.local.score++;
     User.update({id: self.user._id}, self.user, function (res){
       return self.getRandomCountries()
-    });
-    
-    
+    }); 
   }
-
   getData();
 }
