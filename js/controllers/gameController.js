@@ -2,8 +2,8 @@ angular
   .module('worldApp')
   .controller('GameController', GameController);
 
-GameController.$inject = ['$http', '$window', 'TokenService', 'User'];
-function GameController($http, $window, TokenService, User){
+GameController.$inject = ['$http', '$window', 'TokenService', 'User', 'AWS'];
+function GameController($http, $window, TokenService, User, AWS){
 
   var _ = $window._;
   var self = this;
@@ -12,6 +12,9 @@ function GameController($http, $window, TokenService, User){
 
   self.selectedCountries = [];
   self.chooseCountry = {};
+  self.flagImg = "";
+  self.flagPresent = false;
+
 
   function getData () {
     $http.get('https://restcountries.eu/rest/v1/all')
@@ -31,7 +34,7 @@ function GameController($http, $window, TokenService, User){
   }
 
   self.selectQuestion = function (){
-    var questions = _.shuffle(['areaBig', 'areaSmall', 'popBig', 'popSmall', 'borders', 'borders', 'capital', 'capital', 'latLng']);
+    var questions = _.shuffle(['areaBig', 'areaSmall', 'popBig', 'popSmall', 'borders', 'borders', 'capital', 'capital', 'latLng', 'flag', 'flag']);
     var ques = _.first(questions)
     if (ques === 'areaBig'){
       self.question = "Which of these countries is the biggest?";
@@ -54,6 +57,10 @@ function GameController($http, $window, TokenService, User){
       self.question = "Which country has a longditude and latitude of: "
       return self.latLngQuestion();
     }
+    else if(ques === 'flag') {
+      self.question = "Which country does this flag belong to?"
+      return flagQuestion();
+    }
     else {
       self.question = "Which of these countries has the largest population?";
     }
@@ -64,6 +71,19 @@ function GameController($http, $window, TokenService, User){
     self.chooseCountry= _.first(shuffle);
     return self.chooseCountry;
 
+  }
+
+  function getFlag (){
+    self.flagImg = AWS + self.chooseCountry.alpha3Code.toLowerCase() + ".svg"
+    self.flag = self.flagImg
+    self.flagPresent = true;
+    return self.flagImg
+  } 
+
+  function flagQuestion() {
+    pickCountry();
+    getFlag();
+    return self.question = "Which country does this flag belong to?"
   }
 
   self.latLngQuestion = function(){
@@ -110,6 +130,9 @@ function GameController($http, $window, TokenService, User){
     }
     else if (self.question === "Which country has a longidtude and latitude of: " + self.chooseCountry.latlng.join(", ") + "?") {
       return self.latlngCheckWin(country)
+    }
+    else if (self.question === "Which country does this flag belong to?" + self.flagImg){
+      return self.flagCheckWin(country)
     }
     else { return self.bordersCheckWin(country) }
 
@@ -192,6 +215,15 @@ function GameController($http, $window, TokenService, User){
     }
   }
 
+  self.flagCheckWin = function(country){
+    if (country.alpha3Code === self.chooseCountry.alpha3Code) {
+      return self.displayWin();
+    }
+    else {
+      return self.incorrect();
+    }
+  }
+
   self.bordersCheckWin = function(country) {
     if (country.borders == self.chooseCountry.borders){
       return self.displayWin()
@@ -207,7 +239,9 @@ function GameController($http, $window, TokenService, User){
   }
 
   self.displayWin = function() {
-    self.message = ""
+    self.flagPresent = false;
+    self.flag = "";
+    self.message = "";
     self.user.local.score++;
     User.update({id: self.user._id}, self.user, function (res){
       return self.getRandomCountries()

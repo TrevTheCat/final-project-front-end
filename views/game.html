@@ -3,6 +3,7 @@
   {{game.user.local.fullname}}
   <div id="quiz-area">
     <h3>{{game.question}}</h3>
+    <img ng-src="{{game.flag}}" ng-show="game.flagPresent">
     <ul ng-repeat="country in game.selectedCountries">
       <li ng-click="game.checkWin(country)">{{country.name}}</li>
     </ul>
@@ -13,5 +14,6 @@
 
     <button ng-click="game.getRandomCountries()">Shuffle!</button>
   </div>
+
 
 </section>
