@@ -1,6 +1,6 @@
 <section class="login">
   <h2>Login</h2>
-  <form id="login" ng-submit="users.login()">
+  <form id="login" ng-submit="users.login()" ng-show="!users.isLoggedIn()">
     <label for="email">Email</label>
     <input type="text" name="email" placeholder="Email Address" ng-model="users.user.email">
 
@@ -9,6 +9,6 @@
 
     <input type="submit" value="submit">
   </form>
-  <div ng-show="users.isLoggedIn()"><h1>HI {{users.user.local.username}}</h1></div>
+  <div ng-show="!!users.isLoggedIn()"><h2>HI {{users.user.local.username}}</h2></div>
 
 </section>

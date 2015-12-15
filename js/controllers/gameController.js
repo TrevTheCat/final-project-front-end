@@ -20,6 +20,7 @@ function GameController($http, $window, TokenService, User){
       });
   }
 
+
   self.getCountryByName = function(name) {
     return _.where(self.data, { name: name });
   }
@@ -31,7 +32,7 @@ function GameController($http, $window, TokenService, User){
   }
 
   self.selectQuestion = function (){
-    var questions = _.shuffle(['areaBig', 'areaSmall', 'popBig', 'popSmall', 'borders', 'borders', 'capital']);
+    var questions = _.shuffle(['areaBig', 'areaSmall', 'popBig', 'popSmall', 'borders', 'borders', 'capital', 'capital', 'latLng']);
     var ques = _.first(questions)
     if (ques === 'areaBig'){
       self.question = "Which of these countries is the biggest?";
@@ -50,20 +51,35 @@ function GameController($http, $window, TokenService, User){
       self.question = "Which country has a capital of :"
       return self.capitalQuestion();
     }
+    else if (ques === 'latLng') {
+      self.question = "Which country has a longditude and latitude of: "
+      return self.latLngQuestion();
+    }
     else {
       self.question = "Which of these countries has the largest population?";
     }
   }
 
-  self.capitalQuestion = function() {
+  function pickCountry(){
     var shuffle = _.shuffle(self.selectedCountries);
-    self.chooseCountry = _.first(shuffle);
+    self.chooseCountry= _.first(shuffle);
+    return self.chooseCountry;
+
+  }
+
+  self.latLngQuestion = function(){
+    pickCountry();
+    return self.question = "Which country has a longidtude and latitude of: " + self.chooseCountry.latlng.join(", ") + "?"
+
+  }
+
+  self.capitalQuestion = function() {
+    pickCountry();
     return self.question = "Which country has a capital of " + self.chooseCountry.capital + "?"
   }
 
   self.bordersQuestion = function() {
-    var shuffle = _.shuffle(self.selectedCountries);
-    self.chooseCountry = _.first(shuffle);
+    pickCountry();
     if (self.chooseCountry.borders == 0 ) {
       self.question = "Which country is not bordered by any other country"
     }
@@ -92,6 +108,9 @@ function GameController($http, $window, TokenService, User){
     }
     else if (self.question === "Which country has a capital of " + self.chooseCountry.capital + "?" ) {
       return self.capitalCheckWin(country)
+    }
+    else if (self.question === "Which country has a longidtude and latitude of: " + self.chooseCountry.latlng.join(", ") + "?") {
+      return self.latlngCheckWin(country)
     }
     else { return self.bordersCheckWin(country) }
 
@@ -159,6 +178,15 @@ function GameController($http, $window, TokenService, User){
   self.capitalCheckWin = function(country){
     if (country.capital == self.chooseCountry.capital){
       console.log('correct')
+      return self.displayWin();
+    }
+    else {
+      return self.incorrect();
+    }
+  }
+
+  self.latlngCheckWin = function(country){
+    if (country.name == self.chooseCountry.name) {
       return self.displayWin();
     }
     else {
