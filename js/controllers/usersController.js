@@ -13,7 +13,7 @@ function UserController(User, TokenService) {
     var token = res.token ? res.token:null;
    
     if (token) {
-      self.getUsers();
+      getUsers();
       self.user = TokenService.getCurrentUser();
     }
 
@@ -34,17 +34,20 @@ function UserController(User, TokenService) {
     self.user = {};
   }
 
-  self.getUsers = function(){
+  function getUsers (){
+    console.log("GETTING USERS");
     User.query(function(data){
+      console.log(data);
       self.all = data.users;
     });
   }
+  getUsers()
 
   self.isLoggedIn = function(){
     return !!TokenService.getToken();
   }
   if (self.isLoggedIn()) {
-    self.getUsers();
+    getUsers();
     self.user = TokenService.getCurrentUser();
   }
 

@@ -2,15 +2,13 @@ angular
   .module('worldApp')
   .controller('GameController', GameController);
 
-GameController.$inject = ['$http', '$window', 'TokenService'];
-function GameController($http, $window, TokenService){
+GameController.$inject = ['$http', '$window', 'TokenService', 'User'];
+function GameController($http, $window, TokenService, User){
 
   var _ = $window._;
   var self = this;
   self.data = [];
   self.user = TokenService.getCurrentUser();
-  console.log(self.user)
-  self.user.local.score;
 
   self.selectedCountries = [];
   self.chooseCountry = {};
@@ -184,10 +182,11 @@ function GameController($http, $window, TokenService){
 
   self.displayWin = function() {
     self.user.local.score++;
-    $http.patch('http://localhost:3000/api/users/' + self.user._id, self.user);
-    self.user.$save
-    console.log(self.user)
-    return self.getRandomCountries()
+    User.update({id: self.user._id}, self.user, function (res){
+      return self.getRandomCountries()
+    });
+    
+    
   }
 
   getData();

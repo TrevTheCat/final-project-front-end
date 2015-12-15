@@ -8,6 +8,7 @@ body {
 .title {
   height: 200px;
   background-image: url("http://theamericangenius.com/wp-content/uploads/2012/03/vintage-map.png");
+  background-size: center;
 
 }  
 h1 {
@@ -20,5 +21,12 @@ h1 {
 header {
   width: 100%;
   
+}
+
+#quiz-area {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
 }
 

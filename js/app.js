@@ -12,11 +12,13 @@ function MainRouter($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('register', {
       url: '/register',
-      templateUrl: '/views/register.html'
+      templateUrl: '/views/register.html',
+      controller: 'UserController as users'
     })
     .state('login', {
       url:'/login',
-      templateUrl:'/views/login.html'
+      templateUrl:'/views/login.html',
+      controller: 'UserController as users'
     })
     .state('game', {
       url: '/game',
@@ -25,7 +27,8 @@ function MainRouter($stateProvider, $urlRouterProvider) {
     })
     .state('leaderboard', {
       url: '/leaderboard',
-      templateUrl: '/views/leaderboard.html'
+      templateUrl: '/views/leaderboard.html',
+      controller: 'UserController as users'
     });
 
   $urlRouterProvider.otherwise('/');
