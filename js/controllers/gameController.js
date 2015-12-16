@@ -74,9 +74,10 @@ function GameController($http, $window, TokenService, User, AWS){
   }
 
   function getFlag (){
+    self.flagPresent = true;
     self.flagImg = AWS + self.chooseCountry.alpha3Code.toLowerCase() + ".svg"
     self.flag = self.flagImg
-    self.flagPresent = true;
+    
     return self.flagImg
   } 
 
@@ -244,7 +245,8 @@ function GameController($http, $window, TokenService, User, AWS){
     self.message = "";
     self.user.local.score++;
     User.update({id: self.user._id}, self.user, function (res){
-      return self.getRandomCountries()
+      return console.log('hi')
+      self.getRandomCountries()
     }); 
   }
   getData();

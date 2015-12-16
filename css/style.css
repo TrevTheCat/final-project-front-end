@@ -1,21 +1,20 @@
-body {
+#background {
+  height:100vh;
   background-image: url("http://educypedia.karadimov.info/library/world.gif");
   background-size: cover;
-  
-  
 }
 
 .title {
   height: 200px;
-  background-image: url("http://theamericangenius.com/wp-content/uploads/2012/03/vintage-map.png");
-  background-size: center;
+  background-image: url("./images/vintage-map.png");
+  background-size: auto 200px;
 
 }  
 h1 {
   text-align: center;
   color: white;
-  font-size: 75px;
-  padding: 40px;
+  font-size: 130px;
+  padding: 20px;
 }
 
 header {
@@ -27,6 +26,18 @@ header {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  background-color: white;
+  background-color: rgba(0,0,0,0.1);
 }
 
+.quiz-questions {
+  
+
+}
+
+.question {
+  list-style-type: none;
+  background-color: white;
+  margin: 10px;
+  border-radius: 10px;
+  text-align: center;
+}
