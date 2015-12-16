@@ -4,16 +4,18 @@
   <div id="quiz-area">
     <h3>{{game.question}}</h3>
     <img ng-src="{{game.flag}}" width="580" ng-show="game.flagPresent">
-      <div class="row quiz-questions">
-        <ul ng-repeat="country in game.selectedCountries">
-          <li class="one-half column question" ng-click="game.checkWin(country)">{{country.name}}</li>
-        </ul>
-      </div>
-      <p>{{game.message}}</p>
+    <div class="row quiz-questions">
+      <ul ng-repeat="country in game.selectedCountries">
+        <li class="one-half column question" ng-click="game.checkWin(country)">{{country.name}}</li>
+      </ul>
+    </div>
+    <p>{{game.message}}</p>
 
-      <p>{{game.user.local.score}}</p>
+    <p id="score-display">Your current Score is: {{game.user.local.score}}</p>
 
-      <button ng-click="game.getRandomCountries()">Shuffle!</button>
+    <div class="button-centering">
+      <button class="button-primary"ng-click="game.getRandomCountries()">New Question?</button>
+    </div>
     
   </div>
 
