@@ -245,8 +245,7 @@ function GameController($http, $window, TokenService, User, AWS){
     self.message = "";
     self.user.local.score++;
     User.update({id: self.user._id}, self.user, function (res){
-      return console.log('hi')
-      self.getRandomCountries()
+      return self.getRandomCountries()
     }); 
   }
   getData();
