@@ -18,6 +18,7 @@
   <script type="text/javascript" src="./js/services/tokenService.js"></script>
   <script type="text/javascript" src="./js/services/authInterceptor.js"></script>
 
+  <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,200,600' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="./css/skeleton.css">
   <link rel="stylesheet" type="text/css" href="./css/style.css">
 
@@ -26,12 +27,25 @@
 
 
   <header ng-controller="UserController as users">
-    <nav class="tabs">
-      <a ng-show="!users.isLoggedIn()" ui-sref="register">Register</a>
-      <a ng-show="!users.isLoggedIn()" ui-sref="login">Login</a>
-      <a ng-show="users.isLoggedIn()" ui-sref="leaderboard">Leaderboard</a>
-      <a ng-show="users.isLoggedIn()" ui-sref="game">Play Quiz</a>
-      <a ng-show="users.isLoggedIn()" ng-click="users.disappear()">Logout</a>
+    <nav class="tabs navbar">
+      <div class="container">
+        <ul class="navbar-list">
+          <li class="navbar-item">
+            <a ng-show="!users.isLoggedIn()" ui-sref="register" class="tab">Register</a>
+          </li>
+          <li class="navbar-item">
+            <a ng-show="!users.isLoggedIn()" ui-sref="login" class="tab">Login</a>
+          </li>
+          <li class="navbar-item">
+            <a ng-show="users.isLoggedIn()" ui-sref="leaderboard" class="tab">Leaderboard</a>
+          </li>
+          <li class="navbar-item">
+            <a ng-show="users.isLoggedIn()" ui-sref="game" class="tab">Play Quiz</a>
+          </li>
+          <li class="navbar-item"><a ng-show="users.isLoggedIn()" ng-click="users.disappear()" class="tab">Logout</a>
+          </li>
+        </ul>
+      </div>
     </nav>
   </header>
   <div class="title">

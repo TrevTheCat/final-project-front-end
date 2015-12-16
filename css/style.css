@@ -1,15 +1,22 @@
+body {
+  font-family: 'Titillium Web', sans-serif;
+}
+
 #background {
   height:100vh;
   background-image: url("http://educypedia.karadimov.info/library/world.gif");
   background-size: cover;
   color: #274156;
+
 }
 
 .title {
   height: 200px;
-  background-image: url("./images/vintage-map.png");
+  background-color: #1C6E8C;
   background-size: auto 200px;
+  width: 100%;
 
+  
 }  
 h1 {
   text-align: center;
@@ -20,7 +27,22 @@ h1 {
 
 header {
   width: 100%;
-  
+  height: 40px;
+  font-size: 18px;
+  padding: 10px;
+  background-color: #C2D3CD; 
+}
+
+.tab {
+  height: 20px;
+  font-size: 18px;
+  padding: 5px;
+
+
+}
+
+a {
+  text-decoration: none;
 }
 
 #quiz-area {
@@ -57,6 +79,30 @@ header {
 
 .button-centering {
   text-align: center;
+}
 
+.navbar-list {
+  list-style-type: none;
+  padding: 5px;
+  width: 100%;
+}
 
+.navbar-item {
+  display: inline;
+  margin: 20px;
+  padding: 10px;
+
+}
+
+.navbar-item a{
+  color: #1C6E8C;
+}
+
+.navbar-item:hover {
+  background-color: #1C6E8C;
+  border-radius: 5px;
+}
+
+.navbar a:hover{
+  color: white;
 }
