@@ -37,8 +37,6 @@ header {
   height: 20px;
   font-size: 18px;
   padding: 5px;
-
-
 }
 
 a {
@@ -51,11 +49,6 @@ a {
   padding: 20px;
   background-color: rgba(128,128,128,0.8);
   border-radius: 10px;
-}
-
-.quiz-questions {
-  
-
 }
 
 .question {
