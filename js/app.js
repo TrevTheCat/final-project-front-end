@@ -1,6 +1,6 @@
 angular
   .module('worldApp', ['angular-jwt', 'ngResource', 'ui.router'])
-  .constant('API', 'quiet-depths-5773.herokuapp.com')
+  .constant('API', 'https://quiet-depths-5773.herokuapp.com/api')
   .constant('AWS', 'https://s3-eu-west-1.amazonaws.com/worldwize/')
   .config(MainRouter)
   .config(function($httpProvider){
