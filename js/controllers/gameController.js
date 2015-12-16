@@ -54,7 +54,7 @@ function GameController($http, $window, TokenService, User, AWS){
       return self.capitalQuestion();
     }
     else if (ques === 'latLng') {
-      self.question = "Which country has a longditude and latitude of: "
+      self.question = "Which country has a longitude and latitude of: "
       return self.latLngQuestion();
     }
     else if(ques === 'flag') {
@@ -89,7 +89,7 @@ function GameController($http, $window, TokenService, User, AWS){
 
   self.latLngQuestion = function(){
     pickCountry();
-    return self.question = "Which country has a longidtude and latitude of: " + self.chooseCountry.latlng.join(", ") + "?"
+    return self.question = "Which country has a longitude and latitude of: " + self.chooseCountry.latlng.join(", ") + "?"
 
   }
 
@@ -129,7 +129,7 @@ function GameController($http, $window, TokenService, User, AWS){
     else if (self.question === "Which country has a capital of " + self.chooseCountry.capital + "?" ) {
       return self.capitalCheckWin(country)
     }
-    else if (self.question === "Which country has a longidtude and latitude of: " + self.chooseCountry.latlng.join(", ") + "?") {
+    else if (self.question === "Which country has a longitude and latitude of: " + self.chooseCountry.latlng.join(", ") + "?") {
       return self.latlngCheckWin(country)
     }
     else if (self.question === "Which country does this flag belong to?" + self.flagImg){
