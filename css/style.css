@@ -4,9 +4,10 @@ body {
 }
 
 #background {
+  min-height: 100vh;
   background-image: url("https://s-media-cache-ak0.pinimg.com/originals/76/05/1d/76051d264f1e934dd2c793665b2adbe0.gif");
   background-size: cover;
-  color: #274156;
+  color: #1C6E8C;
 
 }
 
@@ -30,6 +31,11 @@ h2 {
   color: #1C6E8C;
   font-size: 50px;
   font-weight: 600px;
+  max-width: 600px;
+  background-color: rgba(255,255,255, 0.8);
+  text-align: center;
+  margin: 0 auto;
+  padding: 5px;
 }
 
 header {
@@ -55,7 +61,7 @@ a {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  background-color: rgba(128,128,128,0.8);
+  background-color: rgba(255,255,255, 0.8);
   border-radius: 10px;
 }
 
@@ -65,6 +71,7 @@ a {
   margin: 10px;
   border-radius: 10px;
   text-align: center;
+  border: 1px solid #1C6E8C;
 
 }
 
@@ -113,4 +120,11 @@ a {
 
 .navbar a:hover{
   color: white;
+}
+
+/*Leaderboard*/
+.leaderboard {
+  margin: 100px;
+  background-color: rgba(255,255,255, 0.8);
+  font-size: 20px;
 }

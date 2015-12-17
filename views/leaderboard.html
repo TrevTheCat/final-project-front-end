@@ -1,21 +1,23 @@
 <section>
   <h2>Leaderboard</h2>
-  <table class="u-full-width">
-    <thead>
-      <tr>  
-        <th>Image</th>
-        <th>Username</th>
-        <th>Full Name</th>
-        <th>Score</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="user in users.all | orderBy:'-local.score'">
-        <th><img ng-src="{{user.local.image}}" height="100px"></th>
-        <th>{{user.local.username}}</th>
-        <th>{{user.local.fullname}}</th>
-        <th>{{user.local.score}}</th>
-      </tr>
-    </tbody>
-  </table>
+  <div class="leaderboard">
+    <table class="u-full-width">
+      <thead>
+        <tr>  
+          <th>Image</th>
+          <th>Username</th>
+          <th>Full Name</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="user in users.all | orderBy:'-local.score'">
+          <th><img ng-src="{{user.local.image}}" height="100px"></th>
+          <th>{{user.local.username}}</th>
+          <th>{{user.local.fullname}}</th>
+          <th>{{user.local.score}}</th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </section>
