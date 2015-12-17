@@ -1,6 +1,6 @@
 <section>
   <h2>Register</h2>
-  <form id="sign-up" ng-submit="users.register()" class="row">
+  <form id="sign-up" ng-submit="users.register()" class="row" ng-show="!users.isLoggedIn()">
     <label for="username">Username</label>
     <input type="text" name="username" placeholder="Username" ng-model="users.user.username" class="u-full-width">
 
@@ -20,4 +20,10 @@
       <input class="button-primary" type="submit" value="submit">
     </div>
   </form>
+
+  <div ng-show="!!users.isLoggedIn()">
+    <h2>Welcome {{users.user.local.username}}!</h2>
+    <h3>Click on <strong>Play Quiz?</strong> to begin World Wize, the indefinate addicting quiz and see if you can make it to the top of the leaderboard.</h3>
+  </div>
+
 </section>
