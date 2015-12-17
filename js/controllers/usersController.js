@@ -8,6 +8,7 @@ function UserController(User, TokenService) {
 
   self.all  = [];
   self.user = {};
+  
 
   function handleLogin(res) {
     var token = res.token ? res.token:null;

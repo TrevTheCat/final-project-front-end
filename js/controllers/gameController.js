@@ -8,7 +8,11 @@ function GameController($http, $window, TokenService, User, AWS){
   var _ = $window._;
   var self = this;
   self.data = [];
-  self.user = TokenService.getCurrentUser();
+  self.user = {};
+  var user = TokenService.getCurrentUser();
+  User.get({ id: user._id }, function(res) {
+    self.user = res.user;
+  });
 
   self.selectedCountries = [];
   self.chooseCountry = {};
