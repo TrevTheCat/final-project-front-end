@@ -50,9 +50,9 @@ function UserController(User, TokenService) {
   }
 
   self.editUsers = function(){
-    User.update({id: self.user._id}), self.user, function(){
+    User.update({ id: self.user._id }, self.user, function(){
       console.log("update");
-    }
+    })
   }
 
 }
