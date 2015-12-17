@@ -11,6 +11,10 @@ angular
 
 function MainRouter($stateProvider, $urlRouterProvider) {
   $stateProvider
+    .state('home', {
+      url: '/',
+      templateUrl: '/home.html'
+    })
     .state('register', {
       url: '/register',
       templateUrl: '/views/register.html',
