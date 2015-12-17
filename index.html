@@ -33,21 +33,21 @@
       <div class="container">
         <ul class="navbar-list">
           <li class="navbar-item">
-            <a ng-show="!users.isLoggedIn()" ui-sref="register" class="tab">Register</a>
+            <a ng-if="!users.isLoggedIn()" ui-sref="register" class="tab">Register</a>
           </li>
           <li class="navbar-item">
-            <a ng-show="!users.isLoggedIn()" ui-sref="login" class="tab">Login</a>
+            <a ng-if="!users.isLoggedIn()" ui-sref="login" class="tab">Login</a>
           </li>
           <li class="navbar-item">
-            <a ng-show="users.isLoggedIn()" ui-sref="leaderboard" class="tab">Leaderboard</a>
+            <a ng-if="users.isLoggedIn()" ui-sref="leaderboard" class="tab">Leaderboard</a>
           </li>
           <li class="navbar-item">
-            <a ng-show="users.isLoggedIn()" ui-sref="game" class="tab">Play Quiz</a>
+            <a ng-if="users.isLoggedIn()" ui-sref="game" class="tab">Play Quiz</a>
           </li>
           <li class="navbar-item">
-            <a ng-show="users.isLoggedIn()" ui-sref="edit" class="tab">Edit Profile</a>
+            <a ng-if="users.isLoggedIn()" ui-sref="edit" class="tab">Edit Profile</a>
           </li>
-          <li class="navbar-item"><a ng-show="users.isLoggedIn()" ng-click="users.disappear()" class="tab">Logout</a>
+          <li class="navbar-item"><a ng-if="users.isLoggedIn()" ng-click="users.disappear()" class="tab">Logout</a>
           </li>
         </ul>
       </div>
