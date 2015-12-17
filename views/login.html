@@ -11,6 +11,9 @@
       <input class="button-primary" type="submit" value="submit">
     </div>
   </form>
-  <div ng-show="!!users.isLoggedIn()"><h2>HI {{users.user.local.username}}</h2></div>
+  <div ng-show="!!users.isLoggedIn()">
+    <h2>Welcome back {{users.user.local.username}}!</h2>
+    <h3>Can you improve on your score of {{users.user.local.score}} ?</h3>
+  </div>
 
 </section>
