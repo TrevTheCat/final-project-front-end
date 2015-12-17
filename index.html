@@ -42,6 +42,9 @@
           <li class="navbar-item">
             <a ng-show="users.isLoggedIn()" ui-sref="game" class="tab">Play Quiz</a>
           </li>
+          <li class="navbar-item">
+            <a ui-sref="edit" class="tab">Edit Profile</a>
+          </li>
           <li class="navbar-item"><a ng-show="users.isLoggedIn()" ng-click="users.disappear()" class="tab">Logout</a>
           </li>
         </ul>

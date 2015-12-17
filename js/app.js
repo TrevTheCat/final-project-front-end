@@ -30,6 +30,11 @@ function MainRouter($stateProvider, $urlRouterProvider) {
       url: '/leaderboard',
       templateUrl: '/views/leaderboard.html',
       controller: 'UserController as users'
+    })
+    .state('edit', {
+      url: '/edit',
+      templateUrl: '/views/edit.html',
+      controller: 'UserController as users'
     });
 
   $urlRouterProvider.otherwise('/');

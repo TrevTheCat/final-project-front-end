@@ -1,0 +1,23 @@
+<section>
+  <h2>Edit User</h2>
+  <form id="sign-up" ng-submit="users.update()" class="row">
+    <label for="username">Username</label>
+    <input type="text" name="username" placeholder="{{users.local.username}}" ng-model="users.user.username" class="u-full-width">
+
+    <label for="fullname">Full Name</label>
+    <input type="text" name="fullname" placeholder="Fullname" ng-model="users.user.fullname" class="u-full-width">
+
+    <label for="image">Image URL</label>
+    <input type="text" name="image" placeholder="Image URL" ng-model="users.user.image" class="u-full-width">
+
+    <label for="email">Email</label>
+    <input type="text" name="email" placeholder="Email Address" ng-model="users.user.email" class="u-full-width">
+
+    <label for="password">Password</label>
+    <input type="password" name="password" placeholder="Password" ng-model="users.user.password" class="u-full-width">
+
+    <div class="button-centering">
+      <input class="button-primary" type="submit" value="submit">
+    </div>
+  </form>
+</section>
