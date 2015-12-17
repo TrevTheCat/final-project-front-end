@@ -9,18 +9,13 @@ function UserController(User, TokenService) {
   self.all  = [];
   self.user = {};
 
-  // var user = TokenService.getCurrentUser();
-  // User.get({ id: user._id }, function(res) {
-  //   self.user = res.user;
-  // });
-
 
   function handleLogin(res) {
     var token = res.token ? res.token:null;
    
     if (token) {
       getUsers();
-      self.user = TokenService.getCurrentUser();
+      getLoggedInUser();
     }
 
     self.message = res.message;
@@ -50,9 +45,17 @@ function UserController(User, TokenService) {
   self.isLoggedIn = function(){
     return !!TokenService.getToken();
   }
+
+  function getLoggedInUser() {
+    var user = TokenService.getCurrentUser();
+    User.get({ id: user._id }, function(res) {
+      self.user = res.user;
+    });
+  }
+
   if (self.isLoggedIn()) {
     getUsers();
-    self.user = TokenService.getCurrentUser();
+    getLoggedInUser();
   }
 
   self.editUsers = function(){
