@@ -49,7 +49,7 @@ function UserController(User, TokenService) {
     self.user = TokenService.getCurrentUser();
   }
 
-  self.editUsers = function(self.user){
+  self.editUsers = function(){
     User.update({ id: self.user._id }, self.user, function(res){
       console.log(res);
     })
