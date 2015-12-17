@@ -64,6 +64,14 @@ a {
   text-decoration: none;
 }
 
+input {
+  font-size: 14px;
+}
+
+label {
+  font-size: 18px;
+}
+
 /*Quiz*/
 
 #quiz-area, #login, #sign-up {
