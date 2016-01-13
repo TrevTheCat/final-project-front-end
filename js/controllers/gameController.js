@@ -39,8 +39,7 @@ function GameController($http, $window, TokenService, User, AWS){
 
   self.selectQuestion = function (){
     var questions = _.shuffle(['areaBig', 'areaSmall', 'popBig', 'popSmall', 'borders', 'borders', 'capital', 'capital', 'latLng', 'flag', 'flag']);
-    var ques = _.first(questions)
-
+    var ques = _.first(questions);
     switch (ques) {
       case 'areaBig':
         self.question = "Which of these countries is the biggest?";
@@ -79,6 +78,11 @@ function GameController($http, $window, TokenService, User, AWS){
 
   }
 
+  function flagQuestion() {
+    pickCountry();
+    getFlag();
+    return self.question = "Which country does this flag belong to?"
+  }
   function getFlag (){
     self.flagPresent = true;
     self.flagImg = AWS + self.chooseCountry.alpha3Code.toLowerCase() + ".svg"
@@ -87,16 +91,9 @@ function GameController($http, $window, TokenService, User, AWS){
     return self.flagImg
   } 
 
-  function flagQuestion() {
-    pickCountry();
-    getFlag();
-    return self.question = "Which country does this flag belong to?"
-  }
-
   self.latLngQuestion = function(){
     pickCountry();
     return self.question = "Which country has a longitude and latitude of: " + self.chooseCountry.latlng.join(", ") + "?"
-
   }
 
   self.capitalQuestion = function() {
@@ -133,10 +130,10 @@ function GameController($http, $window, TokenService, User, AWS){
       return self.popSmallCheckWin(country)
     }
     else if (self.question === "Which country has a capital of " + self.chooseCountry.capital + "?" ) {
-      return self.capitalCheckWin(country)
+      return self.CheckWin(country)
     }
     else if (self.question === "Which country has a longitude and latitude of: " + self.chooseCountry.latlng.join(", ") + "?") {
-      return self.latlngCheckWin(country)
+      return self.CheckWin(country)
     }
     else if (self.question === "Which country does this flag belong to?" + self.flagImg){
       return self.flagCheckWin(country)
@@ -204,8 +201,8 @@ function GameController($http, $window, TokenService, User, AWS){
     }
   }
 
-  self.capitalCheckWin = function(country){
-    if (country.capital == self.chooseCountry.capital){
+  self.CheckWin = function(country){
+    if (country.name == self.chooseCountry.name){
       return self.displayWin();
     }
     else {
@@ -213,17 +210,9 @@ function GameController($http, $window, TokenService, User, AWS){
     }
   }
 
-  self.latlngCheckWin = function(country){
-    if (country.name == self.chooseCountry.name) {
-      return self.displayWin();
-    }
-    else {
-      return self.incorrect();
-    }
-  }
 
   self.flagCheckWin = function(country){
-    if (country.alpha3Code === self.chooseCountry.alpha3Code) {
+    if (country.name === self.chooseCountry.name) {
       return self.displayWin();
     }
     else {
