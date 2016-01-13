@@ -69,7 +69,9 @@ function GameController($http, $window, TokenService, User, AWS){
         self.question = "Which country has a longitude and latitude of: ";
         self.latLngQuestion();
         break;
+
     }
+  }
 
   function pickCountry(){
     var shuffle = _.shuffle(self.selectedCountries);
