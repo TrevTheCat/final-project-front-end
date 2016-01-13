@@ -1,4 +1,4 @@
-angular
+  angular
   .module('worldApp')
   .controller('GameController', GameController);
 
@@ -40,35 +40,37 @@ function GameController($http, $window, TokenService, User, AWS){
   self.selectQuestion = function (){
     var questions = _.shuffle(['areaBig', 'areaSmall', 'popBig', 'popSmall', 'borders', 'borders', 'capital', 'capital', 'latLng', 'flag', 'flag']);
     var ques = _.first(questions)
-    if (ques === 'areaBig'){
-      self.question = "Which of these countries is the biggest?";
+
+    switch (ques) {
+      case 'areaBig':
+        self.question = "Which of these countries is the biggest?";
+        break;
+      case 'areaSmall':
+        self.question = "Which of these countries is the smallest?";
+        break;
+      case 'popBig':
+        self.question =  "Which of these countries has the largest population?";
+        break;
+      case 'popSmall':
+        self.question = "Which of these countries has the smallest population?";
+        break;
+      case 'borders':
+        self.question = "Which of these country has the following borders?";
+        self.bordersQuestion();
+        break;
+      case 'capital':
+        self.question = "Which country has a capital of :";
+        self.capitalQuestion();
+        break;
+      case 'flag':
+        self.question = "Which country does this flag belong to?";
+        flagQuestion();
+        break;
+      case 'latLng':
+        self.question = "Which country has a longitude and latitude of: ";
+        self.latLngQuestion();
+        break;
     }
-    else if (ques === 'areaSmall'){
-      self.question = "Which of these countries is the smallest?"
-    }
-    else if (ques === 'popSmall') {
-      self.question = "Which of these countries has the smallest population?"
-    }
-    else if (ques === 'borders') {
-      self.question = "Which of these country has the following borders?"
-      return self.bordersQuestion();
-    }
-    else if (ques === 'capital') {
-      self.question = "Which country has a capital of :"
-      return self.capitalQuestion();
-    }
-    else if (ques === 'latLng') {
-      self.question = "Which country has a longitude and latitude of: "
-      return self.latLngQuestion();
-    }
-    else if(ques === 'flag') {
-      self.question = "Which country does this flag belong to?"
-      return flagQuestion();
-    }
-    else {
-      self.question = "Which of these countries has the largest population?";
-    }
-  }
 
   function pickCountry(){
     var shuffle = _.shuffle(self.selectedCountries);
