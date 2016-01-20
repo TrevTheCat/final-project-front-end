@@ -1,6 +1,6 @@
 angular
   .module('worldApp', ['angular-jwt', 'ngResource', 'ui.router'])
-  .constant('API', 'https://localhost:3000/api')
+  .constant('API', 'http://localhost:3000/api')
   .constant('AWS', 'https://s3-eu-west-1.amazonaws.com/worldwize/')
   .config(MainRouter)
   .config(function($httpProvider){
