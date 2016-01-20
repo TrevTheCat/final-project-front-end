@@ -54,19 +54,15 @@ function GameController($http, $window, TokenService, User, AWS){
         self.question = "Which of these countries has the smallest population?";
         break;
       case 'borders':
-        self.question = "Which of these country has the following borders?";
         self.bordersQuestion();
         break;
       case 'capital':
-        self.question = "Which country has a capital of :";
         self.capitalQuestion();
         break;
       case 'flag':
-        self.question = "Which country does this flag belong to?";
         flagQuestion();
         break;
       case 'latLng':
-        self.question = "Which country has a longitude and latitude of: ";
         self.latLngQuestion();
         break;
 
@@ -77,14 +73,14 @@ function GameController($http, $window, TokenService, User, AWS){
     var shuffle = _.shuffle(self.selectedCountries);
     self.chooseCountry= _.first(shuffle);
     return self.chooseCountry;
-
   }
 
   function flagQuestion() {
     pickCountry();
     getFlag();
-    return self.question = "Which country does this flag belong to?"
+    return self.question = "Which country does this flag belong to?";
   }
+  
   function getFlag (){
     self.flagPresent = true;
     self.flagImg = AWS + self.chooseCountry.alpha3Code.toLowerCase() + ".svg"
