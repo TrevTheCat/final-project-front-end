@@ -54,18 +54,29 @@ function GameController($http, $window, TokenService, User, AWS){
         self.question = "Which of these countries has the smallest population?";
         break;
       case 'borders':
-        bordersQuestion();
+        pickCountry();
+        if (self.chooseCountry.borders == 0 ) {
+          self.question = "Which country is not bordered by any other country"
+        }
+        else {
+          self.question = "Which country has the following borders? " + self.chooseCountry.borders.map(function(alpha3Code) {
+            return _.find(self.data, { alpha3Code: alpha3Code }).name;
+          }).join(", ");
+        }
         break;
       case 'capital':
-        capitalQuestion();
+        pickCountry();
+        return self.question = "Which country has a capital of " + self.chooseCountry.capital + "?"
         break;
       case 'flag':
-        flagQuestion();
+        pickCountry();
+        getFlag();
+        self.question = "Which country does this flag belong to?";
         break;
       case 'latLng':
-        latLngQuestion();
+        pickCountry();
+        self.question = "Which country has a longitude and latitude of: " + self.chooseCountry.latlng.join(", ") + "?";
         break;
-
     }
   }
 
@@ -75,44 +86,12 @@ function GameController($http, $window, TokenService, User, AWS){
     return self.chooseCountry;
   }
 
-  function flagQuestion(){
-    pickCountry();
-    getFlag();
-    return self.question = "Which country does this flag belong to?";
-  }
-
   function getFlag(){
     self.flagPresent = true;
     self.flagImg = AWS + self.chooseCountry.alpha3Code.toLowerCase() + ".svg"
     self.flag = self.flagImg
-    
     return self.flagImg
   } 
-
-  function latLngQuestion(){
-    pickCountry();
-    return self.question = "Which country has a longitude and latitude of: " + self.chooseCountry.latlng.join(", ") + "?"
-  }
-
-  function capitalQuestion() {
-    pickCountry();
-    return self.question = "Which country has a capital of " + self.chooseCountry.capital + "?"
-  }
-
-  function bordersQuestion(){
-    pickCountry();
-    if (self.chooseCountry.borders == 0 ) {
-      self.question = "Which country is not bordered by any other country"
-    }
-    else {
-      self.question = "Which country has the following borders? " + self.chooseCountry.borders.map(function(alpha3Code) {
-        return _.find(self.data, { alpha3Code: alpha3Code }).name;
-      }).join(", ");
-    }
-
-    return self.chooseCountry;
-  }
-
 
   self.checkWin = function (country) {
     switch (self.question) {
