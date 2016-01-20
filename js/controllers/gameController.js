@@ -34,10 +34,10 @@ function GameController($http, $window, TokenService, User, AWS){
   self.getRandomCountries = function() {
     self.data = _.shuffle(self.data);
     self.selectedCountries = _.slice(self.data, 0, 4);
-    self.selectQuestion();
+    selectQuestion();
   }
 
-  self.selectQuestion = function (){
+  function selectQuestion(){
     var questions = _.shuffle(['areaBig', 'areaSmall', 'popBig', 'popSmall', 'borders', 'borders', 'capital', 'capital', 'latLng', 'flag', 'flag']);
     var ques = _.first(questions);
     switch (ques) {
@@ -54,16 +54,16 @@ function GameController($http, $window, TokenService, User, AWS){
         self.question = "Which of these countries has the smallest population?";
         break;
       case 'borders':
-        self.bordersQuestion();
+        bordersQuestion();
         break;
       case 'capital':
-        self.capitalQuestion();
+        capitalQuestion();
         break;
       case 'flag':
         flagQuestion();
         break;
       case 'latLng':
-        self.latLngQuestion();
+        latLngQuestion();
         break;
 
     }
@@ -75,13 +75,13 @@ function GameController($http, $window, TokenService, User, AWS){
     return self.chooseCountry;
   }
 
-  function flagQuestion() {
+  function flagQuestion(){
     pickCountry();
     getFlag();
     return self.question = "Which country does this flag belong to?";
   }
 
-  function getFlag (){
+  function getFlag(){
     self.flagPresent = true;
     self.flagImg = AWS + self.chooseCountry.alpha3Code.toLowerCase() + ".svg"
     self.flag = self.flagImg
@@ -89,17 +89,17 @@ function GameController($http, $window, TokenService, User, AWS){
     return self.flagImg
   } 
 
-  self.latLngQuestion = function(){
+  function latLngQuestion(){
     pickCountry();
     return self.question = "Which country has a longitude and latitude of: " + self.chooseCountry.latlng.join(", ") + "?"
   }
 
-  self.capitalQuestion = function() {
+  function capitalQuestion() {
     pickCountry();
     return self.question = "Which country has a capital of " + self.chooseCountry.capital + "?"
   }
 
-  self.bordersQuestion = function() {
+  function bordersQuestion(){
     pickCountry();
     if (self.chooseCountry.borders == 0 ) {
       self.question = "Which country is not bordered by any other country"
@@ -117,32 +117,32 @@ function GameController($http, $window, TokenService, User, AWS){
   self.checkWin = function (country) {
     switch (self.question) {
       case "Which of these countries is the biggest?":
-      self.areaBigCheckWin(country);
+      areaBigCheckWin(country);
       break;
       case "Which of these countries is the smallest?":
-      self.areaSmallCheckWin(country);
+      areaSmallCheckWin(country);
       break;
       case "Which of these countries has the largest population?":
-      self.popBigCheckWin(country);
+      popBigCheckWin(country);
       break;
       case "Which of these countries has the smallest population?":
-      self.popSmallCheckWin(country);
+      popSmallCheckWin(country);
       break;
       case self.question === "Which country has a capital of " + self.chooseCountry.capital + "?":
-      self.genCheckWin(country);
+      genCheckWin(country);
       break;
       case "Which country has a longitude and latitude of: " + self.chooseCountry.latlng.join(", ") + "?":
-      self.genCheckWin(country);
+      genCheckWin(country);
       break;
       case "Which country does this flag belong to?" + self.flagImg:
-      self.genCheckWin(country);
+      genCheckWin(country);
       break;
       default:
-      self.bordersCheckWin(country);
+      bordersCheckWin(country);
     }
   }
 
-  self.areaBigCheckWin = function(country) {
+  function areaBigCheckWin(country) {
     for (i=0; i<self.selectedCountries.length; i++){
       if (self.selectedCountries[i].area === null){
         self.selectedCountries[i].area = 0
@@ -150,14 +150,14 @@ function GameController($http, $window, TokenService, User, AWS){
     }
     var areaOfSelectedCountries = (_.sortBy(_.map(self.selectedCountries, 'area')));
     if (country.area == areaOfSelectedCountries[3]){
-      return self.displayWin();
+      return displayWin();
     }
     else {
-      return self.incorrect();
+      return incorrect();
     }
   }
 
-  self.areaSmallCheckWin = function(country) {
+  function areaSmallCheckWin(country) {
     for (i=0; i<self.selectedCountries.length; i++){
       if (self.selectedCountries[i].area === null){
         self.selectedCountries[i].area = 0
@@ -165,14 +165,14 @@ function GameController($http, $window, TokenService, User, AWS){
     }
     var areaOfSelectedCountries = (_.sortBy(_.map(self.selectedCountries, 'area')));
     if (country.area == areaOfSelectedCountries[0]){
-      return self.displayWin();
+      return displayWin();
     }
     else {
-      return self.incorrect();
+      return incorrect();
     }
   }
 
-  self.popBigCheckWin = function(country) {
+  function popBigCheckWin(country){
     for (i=0; i<self.selectedCountries.length; i++){
       if (self.selectedCountries[i].population === null){
         self.selectedCountries[i].population = 0
@@ -180,13 +180,14 @@ function GameController($http, $window, TokenService, User, AWS){
     }
     var popOfSelectedCountries = (_.sortBy(_.map(self.selectedCountries, 'population')));
     if (country.population == popOfSelectedCountries[3]){
-      return self.displayWin();
+      return displayWin();
     }
     else {
-      return self.incorrect();
+      return incorrect();
     }
   }
-  self.popSmallCheckWin = function(country) {
+
+  function popSmallCheckWin(country) {
     for (i=0; i<self.selectedCountries.length; i++){
       if (self.selectedCountries[i].population === null){
         self.selectedCountries[i].population = 0
@@ -194,37 +195,37 @@ function GameController($http, $window, TokenService, User, AWS){
     }
     var popOfSelectedCountries = (_.sortBy(_.map(self.selectedCountries, 'population')));
     if (country.population == popOfSelectedCountries[0]){
-      return self.displayWin();
+      return displayWin();
     }
     else {
-      return self.incorrect();
+      return incorrect();
     }
   }
 
-  self.genCheckWin = function(country){
+  function genCheckWin(country){
     if (country.name == self.chooseCountry.name){
-      return self.displayWin();
+      return displayWin();
     }
     else {
-      return self.incorrect();
+      return incorrect();
     }
   }
 
-  self.bordersCheckWin = function(country) {
+  function bordersCheckWin(country) {
     if (country.borders == self.chooseCountry.borders){
-      return self.displayWin()
+      return displayWin()
     }
     else {
-      return self.incorrect()
+      return incorrect()
     }
   }
 
-  self.incorrect = function(){
+  function incorrect(){
     self.user.local.score--;
     self.message = "Incorrect, try again!"
   }
 
-  self.displayWin = function() {
+  function displayWin() {
     self.flagPresent = false;
     self.flag = "";
     self.message = "";
