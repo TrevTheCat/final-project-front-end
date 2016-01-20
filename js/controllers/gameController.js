@@ -80,7 +80,7 @@ function GameController($http, $window, TokenService, User, AWS){
     getFlag();
     return self.question = "Which country does this flag belong to?";
   }
-  
+
   function getFlag (){
     self.flagPresent = true;
     self.flagImg = AWS + self.chooseCountry.alpha3Code.toLowerCase() + ".svg"
@@ -115,29 +115,31 @@ function GameController($http, $window, TokenService, User, AWS){
 
 
   self.checkWin = function (country) {
-    if (self.question === "Which of these countries is the biggest?") {
-      return self.areaBigCheckWin(country);
+    switch (self.question) {
+      case "Which of these countries is the biggest?":
+      self.areaBigCheckWin(country);
+      break;
+      case "Which of these countries is the smallest?":
+      self.areaSmallCheckWin(country);
+      break;
+      case "Which of these countries has the largest population?":
+      self.popBigCheckWin(country);
+      break;
+      case "Which of these countries has the smallest population?":
+      self.popSmallCheckWin(country);
+      break;
+      case self.question === "Which country has a capital of " + self.chooseCountry.capital + "?":
+      self.genCheckWin(country);
+      break;
+      case "Which country has a longitude and latitude of: " + self.chooseCountry.latlng.join(", ") + "?":
+      self.genCheckWin(country);
+      break;
+      case "Which country does this flag belong to?" + self.flagImg:
+      self.genCheckWin(country);
+      break;
+      default:
+      self.bordersCheckWin(country);
     }
-    else if (self.question === "Which of these countries is the smallest?") {
-      return self.areaSmallCheckWin(country);
-    }
-    else if (self.question === "Which of these countries has the largest population?") {
-      return self.popBigCheckWin(country)
-    }
-    else if (self.question === "Which of these countries has the smallest population?") {
-      return self.popSmallCheckWin(country)
-    }
-    else if (self.question === "Which country has a capital of " + self.chooseCountry.capital + "?" ) {
-      return self.genCheckWin(country)
-    }
-    else if (self.question === "Which country has a longitude and latitude of: " + self.chooseCountry.latlng.join(", ") + "?") {
-      return self.genCheckWin(country)
-    }
-    else if (self.question === "Which country does this flag belong to?" + self.flagImg){
-      return self.genCheckWin(country)
-    }
-    else { return self.bordersCheckWin(country) }
-
   }
 
   self.areaBigCheckWin = function(country) {
