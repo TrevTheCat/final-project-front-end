@@ -132,13 +132,13 @@ function GameController($http, $window, TokenService, User, AWS){
       return self.popSmallCheckWin(country)
     }
     else if (self.question === "Which country has a capital of " + self.chooseCountry.capital + "?" ) {
-      return self.CheckWin(country)
+      return self.genCheckWin(country)
     }
     else if (self.question === "Which country has a longitude and latitude of: " + self.chooseCountry.latlng.join(", ") + "?") {
-      return self.CheckWin(country)
+      return self.genCheckWin(country)
     }
     else if (self.question === "Which country does this flag belong to?" + self.flagImg){
-      return self.flagCheckWin(country)
+      return self.genCheckWin(country)
     }
     else { return self.bordersCheckWin(country) }
 
@@ -203,18 +203,8 @@ function GameController($http, $window, TokenService, User, AWS){
     }
   }
 
-  self.CheckWin = function(country){
+  self.genCheckWin = function(country){
     if (country.name == self.chooseCountry.name){
-      return self.displayWin();
-    }
-    else {
-      return self.incorrect();
-    }
-  }
-
-
-  self.flagCheckWin = function(country){
-    if (country.name === self.chooseCountry.name) {
       return self.displayWin();
     }
     else {
